@@ -5,7 +5,7 @@ import os
 
 app = Flask(__name__)
 
-SENSENOVA_API_KEY = os.environ.get("SENSENOVA_API_KEY", "")
+AVALAI_API_KEY = os.environ.get("AVALAI_API_KEY", "")
 
 @app.route("/")
 def home():
@@ -54,7 +54,7 @@ def generate():
 
     try:
         response = requests.post(
-            "https://token.sensenova.ai/v1/images/edits",
+            "https://api.avalai.ir/v1/images/edits",
             headers=headers,
             json=data,
             timeout=120
