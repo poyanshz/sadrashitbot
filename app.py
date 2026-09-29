@@ -54,7 +54,7 @@ def generate():
 
     try:
         response = requests.post(
-            "https://api.sensenova.ai/v1/images/edits",
+            "https://token.sensenova.ai/v1/images/edits",
             headers=headers,
             json=data,
             timeout=120
