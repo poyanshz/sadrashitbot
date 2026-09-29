@@ -1,12 +1,11 @@
-from flask import Flask, render_template, request, send_file
+from flask import Flask, render_template, request
 import requests
-import io
 import base64
+import os
 
 app = Flask(__name__)
 
-# کلید API SenseNova رو اینجا بذار
-SENSENOVA_API_KEY = "sk-HaXvqQ9XaO2aCfmO3whcBNSsMjVvCZtp"
+SENSENOVA_API_KEY = os.environ.get("SENSENOVA_API_KEY", "")
 
 @app.route("/")
 def home():
@@ -14,17 +13,23 @@ def home():
 
 @app.route("/generate", methods=["POST"])
 def generate():
-    # دریافت عکس آپلود شده
     if "photo" not in request.files:
         return "عکسی آپلود نشده", 400
-    
+
     photo = request.files["photo"]
     photo_bytes = photo.read()
-    
-    # تبدیل عکس به base64
+
+    # تشخیص خودکار فرمت عکس
+    filename = photo.filename.lower()
+    if filename.endswith(".png"):
+        mime = "image/png"
+    elif filename.endswith(".webp"):
+        mime = "image/webp"
+    else:
+        mime = "image/jpeg"
+
     photo_base64 = base64.b64encode(photo_bytes).decode("utf-8")
-    
-    # پرامپت برای SenseNova
+
     prompt = (
         "Create a 4-panel character reference sheet on a clean white background. "
         "Panel 1: CLOSE-UP of the FACE (head and shoulders, front-facing). "
@@ -35,32 +40,39 @@ def generate():
         "hairstyle, and clothing across all four panels. "
         "White background. No text, no labels."
     )
-    
-    # درخواست به SenseNova
+
     headers = {
         "Authorization": f"Bearer {SENSENOVA_API_KEY}",
         "Content-Type": "application/json"
     }
-    
+
     data = {
         "model": "sensenova-u1.5-lite",
         "prompt": prompt,
-        "image": f"data:image/jpeg;base64,{photo_base64}"
+        "image": f"data:{mime};base64,{photo_base64}"
     }
-    
-    response = requests.post(
-        "https://api.sensenova.ai/v1/images/edits",
-        headers=headers,
-        json=data
-    )
-    
-    if response.status_code != 200:
-        return f"خطا در ساخت تصویر: {response.text}", 500
-    
-    result = response.json()
-    image_url = result.get("data", [{}])[0].get("url", "")
-    
-    return f'<img src="{image_url}" style="max-width:100%">'
+
+    try:
+        response = requests.post(
+            "https://api.sensenova.ai/v1/images/edits",
+            headers=headers,
+            json=data,
+            timeout=120
+        )
+
+        if response.status_code != 200:
+            return f"<p style='color:red;'>خطا در ساخت تصویر (کد {response.status_code}):<br>{response.text}</p>", 500
+
+        result = response.json()
+        image_url = result.get("data", [{}])[0].get("url", "")
+
+        if not image_url:
+            return f"<p style='color:red;'>پاسخ نامعتبر:<br>{result}</p>", 500
+
+        return f'<img src="{image_url}" style="max-width:100%; border-radius:10px;">'
+
+    except Exception as e:
+        return f"<p style='color:red;'>خطا: {str(e)}</p>", 500
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
