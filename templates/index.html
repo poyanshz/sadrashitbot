@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ساخت کاراکتر رفرنس شیت</title>
+    <style>
+        body {
+            font-family: Tahoma, sans-serif;
+            background: #1a1a2e;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background: #16213e;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            color: #e94560;
+            margin-bottom: 10px;
+        }
+        p {
+            color: #aaa;
+            margin-bottom: 30px;
+        }
+        input[type="file"] {
+            display: none;
+        }
+        .upload-btn {
+            display: inline-block;
+            background: #0f3460;
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: 0.3s;
+        }
+        .upload-btn:hover {
+            background: #e94560;
+        }
+        #fileName {
+            color: #aaa;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        button {
+            background: #e94560;
+            color: #fff;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #c73650;
+        }
+        button:disabled {
+            background: #555;
+            cursor: not-allowed;
+        }
+        #result {
+            margin-top: 30px;
+        }
+        #result img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+        .loading {
+            color: #e94560;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 کاراکتر رفرنس شیت</h1>
+        <p>عکست رو آپلود کن تا رفرنس شیت بسازیم</p>
+
+        <form id="uploadForm">
+            <label for="photo" class="upload-btn">📷 انتخاب عکس</label>
+            <input type="file" id="photo" name="photo" accept="image/*">
+            <div id="fileName">عکسی انتخاب نشده</div>
+            <button type="submit" id="submitBtn">✨ ساخت رفرنس شیت</button>
+        </form>
+
+        <div id="result"></div>
+        <div id="loading" class="loading" style="display:none;">⏳ در حال ساخت... لطفاً صبر کن</div>
+    </div>
+
+    <script>
+        const photoInput = document.getElementById('photo');
+        const fileName = document.getElementById('fileName');
+        const form = document.getElementById('uploadForm');
+        const result = document.getElementById('result');
+        const loading = document.getElementById('loading');
+        const submitBtn = document.getElementById('submitBtn');
+
+        photoInput.addEventListener('change', () => {
+            if (photoInput.files.length > 0) {
+                fileName.textContent = '✅ ' + photoInput.files[0].name;
+            }
+        });
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (photoInput.files.length === 0) {
+                alert('لطفاً اول یه عکس انتخاب کن');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('photo', photoInput.files[0]);
+
+            loading.style.display = 'block';
+            result.innerHTML = '';
+            submitBtn.disabled = true;
+
+            try {
+                const response = await fetch('/generate', {
+                    method: 'POST',
+                    body: formData
+                });
+                const text = await response.text();
+                result.innerHTML = text;
+            } catch (err) {
+                result.innerHTML = '<p style="color:red;">❌ خطا: ' + err.message + '</p>';
+            } finally {
+                loading.style.display = 'none';
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
