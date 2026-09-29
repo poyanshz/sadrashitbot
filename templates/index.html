@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ساخت کاراکتر رفرنس شیت</title>
     <style>
-        body {
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>AOS.init();</script>  
+      body {
             font-family: Tahoma, sans-serif;
             background: #1a1a2e;
             color: #fff;
@@ -87,14 +90,14 @@
 </head>
 <body>
     <div class="container">
-        <h1>🎨 کاراکتر رفرنس شیت</h1>
-        <p>عکست رو آپلود کن تا رفرنس شیت بسازیم</p>
+        <h1 data-aos="fade-down">🎨 کاراکتر رفرنس شیت</h1>
+        <p data-aos="fade-up" data-aos-delay="100">عکست رو آپلود کن تا رفرنس شیت بسازیم</p>
 
         <form id="uploadForm">
-            <label for="photo" class="upload-btn">📷 انتخاب عکس</label>
+            <label for="photo" class="upload-btn" data-aos="zoom-in" data-aos-delay="200">📷 انتخاب عکس</label>
             <input type="file" id="photo" name="photo" accept="image/*">
             <div id="fileName">عکسی انتخاب نشده</div>
-            <button type="submit" id="submitBtn">✨ ساخت رفرنس شیت</button>
+            <button type="submit" id="submitBtn" data-aos="fade-up" data-aos-delay="300">✨ ساخت رفرنس شیت</button>
         </form>
 
         <div id="result"></div>
