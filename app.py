@@ -47,10 +47,14 @@ def generate():
     }
 
     data = {
-        "model": "sensenova-u1.5-lite",
-        "prompt": prompt,
-        "image": f"data:{mime};base64,{photo_base64}"
-    }
+    "model": "gemini-2.5-flash-image",
+    "prompt": prompt,
+    "images": [
+        {
+            "image_url": f"data:{mime};base64,{photo_base64}"
+        }
+    ]
+}
 
     try:
         response = requests.post(
