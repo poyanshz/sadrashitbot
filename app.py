@@ -42,7 +42,7 @@ def generate():
     )
 
     headers = {
-        "Authorization": f"Bearer {SENSENOVA_API_KEY}",
+        "Authorization": f"Bearer {AVALAI_API_KEY}",
         "Content-Type": "application/json"
     }
 
