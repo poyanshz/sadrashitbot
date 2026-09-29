@@ -47,7 +47,7 @@ def generate():
     }
 
     data = {
-    "model": "gemini-2.5-flash-image",
+   "model": "gpt-image-2.5-flare",
     "prompt": prompt,
     "images": [
         {
