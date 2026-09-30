@@ -339,6 +339,40 @@
             letter-spacing: 1px;
         }
         }
+        /* ===== Glitch Effect ===== */
+        @keyframes glitch {
+            0%, 100% { text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 40px #ff00ff; }
+            25% { text-shadow: -2px 0 #00ffff, 2px 0 #ff00ff; }
+            50% { text-shadow: 2px 0 #00ffff, -2px 0 #ff00ff; }
+            75% { text-shadow: -1px 0 #ff00ff, 1px 0 #00ffff; }
+        }
+
+        h1 {
+            animation: glitch 3s infinite;
+        }
+
+        /* ===== Pulse Effect ===== */
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 15px rgba(255, 0, 255, 0.5); }
+            50% { box-shadow: 0 0 30px rgba(255, 0, 255, 0.9), 0 0 60px rgba(255, 0, 255, 0.5); }
+        }
+
+        button, .upload-btn, .download-btn {
+            animation: pulse 2.5s infinite;
+        }
+
+        /* ===== Float Effect ===== */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .step {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .step:nth-child(2) { animation-delay: 0.5s; }
+        .step:nth-child(3) { animation-delay: 1s; }
     </style>
 </head>
 <body>
@@ -520,21 +554,21 @@
         gsap.from(".container", {
             opacity: 1,
             y: 60,
-            duration: 1.2,
+            duration: 2.0,
             ease: "power3.out"
         });
         gsap.from(".upload-btn", {
             opacity: 1,
             scale: 0.8,
-            duration: 0.8,
-            delay: 0.4,
+            duration: 1.5,
+            delay: 1.0,
             ease: "back.out(1.7)"
         });
         gsap.from("#submitBtn", {
             opacity: 1,
             y: 30,
-            duration: 0.8,
-            delay: 0.6,
+            duration: 1.5,
+            delay: 1.5,
             ease: "power2.out"
         });
         const cursorDot = document.querySelector('.cursor-dot');
@@ -564,6 +598,37 @@
                 scrub: 1
             }
         });
+    </script>
+    <script>
+        // Stagger روی کارت‌های how-it-works
+        gsap.from(".step", {
+            opacity: 1,
+            y: 60,
+            duration: 1.5,
+            stagger: 0.4,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: ".how-it-works",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            }
+        });
+
+        // Typewriter روی متن زیر عنوان
+        const typeText = "عکست رو آپلود کن تا رفرنس شیت بسازیم";
+        const typeTarget = document.querySelector(".container > p");
+        if (typeTarget) {
+            typeTarget.textContent = "";
+            let i = 0;
+            function typeWriter() {
+                if (i < typeText.length) {
+                    typeTarget.textContent += typeText.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 80);
+                }
+            }
+            setTimeout(typeWriter, 1500);
+        }
     </script>
 </body>
 </html>
