@@ -555,25 +555,38 @@
             opacity: 1,
             y: 60,
             duration: 2.0,
-            ease: "power3.out"
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: ".container",
+                start: "top 90%",
+                toggleActions: "play none none none"
+            }
         });
+
         gsap.from(".upload-btn", {
             opacity: 1,
             scale: 0.8,
             duration: 1.5,
-            delay: 1.0,
-            ease: "back.out(1.7)"
+            ease: "back.out(1.7)",
+            scrollTrigger: {
+                trigger: ".upload-btn",
+                start: "top 90%",
+                toggleActions: "play none none none"
+            }
         });
+
         gsap.from("#submitBtn", {
             opacity: 1,
             y: 30,
             duration: 1.5,
-            delay: 1.5,
-            ease: "power2.out"
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: "#submitBtn",
+                start: "top 90%",
+                toggleActions: "play none none none"
+            }
         });
-        const cursorDot = document.querySelector('.cursor-dot');
-        const cursorOutline = document.querySelector('.cursor-outline');
-        window.addEventListener('mousemove', (e) => {
+        window.addEventListener("mousemove", (e) => {
             const posX = e.clientX;
             const posY = e.clientY;
             cursorDot.style.left = posX + 'px';
