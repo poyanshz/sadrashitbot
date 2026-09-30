@@ -7,47 +7,6 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>AOS.init();</script>  
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script>
-    // ثبت ScrollTrigger
-    gsap.registerPlugin(ScrollTrigger);
-
-    // انیمیشن ظاهر شدن کانتینر
-    gsap.from(".container", {
-        opacity: 0,
-        y: 60,
-        duration: 1.2,
-        ease: "power3.out"
-    });
-
-    // انیمیشن دکمه‌ی آپلود
-    gsap.from(".upload-btn", {
-        opacity: 0,
-        scale: 0.8,
-        duration: 0.8,
-        delay: 0.4,
-        ease: "back.out(1.7)"
-    });
-
-    // انیمیشن دکمه‌ی submit
-    gsap.from("#submitBtn", {
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        delay: 0.6,
-        ease: "power2.out"
-    });
-</script>
-      body {
-            font-family: Tahoma, sans-serif;
-            background: #1a1a2e;
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
             margin: 0;
             padding: 20px;
         }
@@ -319,7 +278,6 @@ body {
         });
     </script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>AOS.init();</script>
 <div class="cursor-dot"></div>
 <div class="cursor-outline"></div>
 <script>
@@ -381,5 +339,59 @@ body {
         <p class="copyright">© 2026 Sadra Sheet Bot — تمامی حقوق محفوظ است</p>
     </div>
 </footer>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init();</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.from(".container", {
+            opacity: 0,
+            y: 60,
+            duration: 1.2,
+            ease: "power3.out"
+        });
+        gsap.from(".upload-btn", {
+            opacity: 0,
+            scale: 0.8,
+            duration: 0.8,
+            delay: 0.4,
+            ease: "back.out(1.7)"
+        });
+        gsap.from("#submitBtn", {
+            opacity: 0,
+            y: 30,
+            duration: 0.8,
+            delay: 0.6,
+            ease: "power2.out"
+        });
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+            cursorDot.style.left = posX + 'px';
+            cursorDot.style.top = posY + 'px';
+            cursorOutline.animate({
+                left: posX + 'px',
+                top: posY + 'px'
+            }, { duration: 300, fill: 'forwards' });
+        });
+        const hoverElements = document.querySelectorAll('button, label, a, input');
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => cursorOutline.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursorOutline.classList.remove('hover'));
+        });
+        gsap.to(".container", {
+            yPercent: -15,
+            ease: "none",
+            scrollTrigger: {
+                trigger: "body",
+                start: "top top",
+                end: "bottom top",
+                scrub: 1
+            }
+        });
+    </script>
 </body>
 </html>
