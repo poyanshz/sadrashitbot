@@ -226,6 +226,27 @@
     padding-top: 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
+        .download-btn {
+            display: none;
+            background: #0f3460;
+            color: #fff;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .download-btn:hover {
+            background: #e94560;
+        }
+
+        .download-btn.show {
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
@@ -241,6 +262,7 @@
         </form>
 
         <div id="result"></div>
+        <a id="downloadBtn" class="download-btn" download="reference-sheet.png">💾 دانلود رفرنس شیت</a>
         <div id="loading" class="loading" style="display:none;">⏳ در حال ساخت... لطفاً صبر کن</div>
     </div>
 
@@ -279,6 +301,13 @@
                 });
                 const text = await response.text();
                 result.innerHTML = text;
+                // فعال کردن دکمه دانلود
+                const downloadBtn = document.getElementById("downloadBtn");
+                const imgMatch = text.match(/src="([^"]+)"/);
+                if (imgMatch) {
+                    downloadBtn.href = imgMatch[1];
+                    downloadBtn.classList.add("show");
+                }
             } catch (err) {
                 result.innerHTML = '<p style="color:red;">❌ خطا: ' + err.message + '</p>';
             } finally {
