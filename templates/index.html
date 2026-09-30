@@ -221,5 +221,32 @@ body {
 <script>AOS.init();</script>
 <div class="cursor-dot"></div>
 <div class="cursor-outline"></div>
+<script>
+    // Parallax روی کانتینر
+    gsap.to(".container", {
+        yPercent: -15,
+        ease: "none",
+        scrollTrigger: {
+            trigger: "body",
+            start: "top top",
+            end: "bottom top",
+            scrub: 1
+        }
+    });
+
+    // انیمیشن دکمه‌ها با اسکرول
+    gsap.utils.toArray(".upload-btn").forEach((btn) => {
+        gsap.to(btn, {
+            y: -10,
+            ease: "none",
+            scrollTrigger: {
+                trigger: btn,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 1
+            }
+        });
+    });
+</script>
 </body>
 </html>
