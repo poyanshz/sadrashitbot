@@ -551,41 +551,93 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script>
         gsap.registerPlugin(ScrollTrigger);
+
+        // ===== انیمیشن کانتینر اصلی =====
         gsap.from(".container", {
-            opacity: 1,
-            y: 60,
-            duration: 2.0,
+            opacity: 0,
+            y: 80,
+            duration: 2.5,
             ease: "power3.out",
             scrollTrigger: {
                 trigger: ".container",
-                start: "top 90%",
+                start: "top 95%",
                 toggleActions: "play none none none"
             }
         });
 
+        // ===== انیمیشن دکمه آپلود =====
         gsap.from(".upload-btn", {
-            opacity: 1,
-            scale: 0.8,
-            duration: 1.5,
+            opacity: 0,
+            scale: 0.7,
+            duration: 2.0,
+            delay: 0.8,
             ease: "back.out(1.7)",
             scrollTrigger: {
                 trigger: ".upload-btn",
-                start: "top 90%",
+                start: "top 95%",
                 toggleActions: "play none none none"
             }
         });
 
+        // ===== انیمیشن دکمه ساخت =====
         gsap.from("#submitBtn", {
-            opacity: 1,
-            y: 30,
-            duration: 1.5,
+            opacity: 0,
+            y: 40,
+            duration: 2.0,
+            delay: 1.5,
             ease: "power2.out",
             scrollTrigger: {
                 trigger: "#submitBtn",
-                start: "top 90%",
+                start: "top 95%",
                 toggleActions: "play none none none"
             }
         });
+
+        // ===== انیمیشن کارت‌های how-it-works (یکی‌یکی) =====
+        gsap.from(".step", {
+            opacity: 0,
+            y: 80,
+            duration: 2.0,
+            stagger: 1.0,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: ".how-it-works",
+                start: "top 85%",
+                toggleActions: "play none none none"
+            }
+        });
+
+        // ===== انیمیشن سوالات متداول (یکی‌یکی) =====
+        gsap.from(".faq-item", {
+            opacity: 0,
+            x: -60,
+            duration: 2.0,
+            stagger: 0.8,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: ".faq",
+                start: "top 85%",
+                toggleActions: "play none none none"
+            }
+        });
+
+        // ===== انیمیشن فوتر =====
+        gsap.from(".footer", {
+            opacity: 0,
+            y: 50,
+            duration: 2.0,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: ".footer",
+                start: "top 95%",
+                toggleActions: "play none none none"
+            }
+        });
+
+        // ===== Custom Cursor =====
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+
         window.addEventListener("mousemove", (e) => {
             const posX = e.clientX;
             const posY = e.clientY;
@@ -594,13 +646,16 @@
             cursorOutline.animate({
                 left: posX + 'px',
                 top: posY + 'px'
-            }, { duration: 300, fill: 'forwards' });
+            }, { duration: 500, fill: 'forwards' });
         });
+
         const hoverElements = document.querySelectorAll('button, label, a, input');
         hoverElements.forEach(el => {
             el.addEventListener('mouseenter', () => cursorOutline.classList.add('hover'));
             el.addEventListener('mouseleave', () => cursorOutline.classList.remove('hover'));
         });
+
+        // ===== Parallax =====
         gsap.to(".container", {
             yPercent: -15,
             ease: "none",
@@ -611,23 +666,8 @@
                 scrub: 1
             }
         });
-    </script>
-    <script>
-        // Stagger روی کارت‌های how-it-works
-        gsap.from(".step", {
-            opacity: 1,
-            y: 60,
-            duration: 1.5,
-            stagger: 0.4,
-            ease: "power3.out",
-            scrollTrigger: {
-                trigger: ".how-it-works",
-                start: "top 80%",
-                toggleActions: "play none none none"
-            }
-        });
 
-        // Typewriter روی متن زیر عنوان
+        // ===== Typewriter =====
         const typeText = "عکست رو آپلود کن تا رفرنس شیت بسازیم";
         const typeTarget = document.querySelector(".container > p");
         if (typeTarget) {
@@ -637,10 +677,10 @@
                 if (i < typeText.length) {
                     typeTarget.textContent += typeText.charAt(i);
                     i++;
-                    setTimeout(typeWriter, 80);
+                    setTimeout(typeWriter, 100);
                 }
             }
-            setTimeout(typeWriter, 1500);
+            setTimeout(typeWriter, 2000);
         }
     </script>
 </body>
