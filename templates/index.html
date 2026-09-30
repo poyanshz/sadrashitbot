@@ -118,6 +118,44 @@
             color: #e94560;
             margin-top: 20px;
         }
+/* ===== Custom Cursor ===== */
+body {
+    cursor: none;
+}
+
+.cursor-dot {
+    width: 8px;
+    height: 8px;
+    background: #e94560;
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+}
+
+.cursor-outline {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #e94560;
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease;
+}
+
+.cursor-outline.hover {
+    width: 60px;
+    height: 60px;
+    border-color: #fff;
+}
+
+@media (max-width: 768px) {
+    body { cursor: auto; }
+    .cursor-dot, .cursor-outline { display: none; }
+}
     </style>
 </head>
 <body>
@@ -181,5 +219,7 @@
     </script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>AOS.init();</script>
+<div class="cursor-dot"></div>
+<div class="cursor-outline"></div>
 </body>
 </html>
