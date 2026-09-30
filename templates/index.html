@@ -156,6 +156,61 @@ body {
     body { cursor: auto; }
     .cursor-dot, .cursor-outline { display: none; }
 }
+/* ===== How It Works ===== */
+.how-it-works {
+    padding: 80px 20px;
+    text-align: center;
+    background: rgba(15, 52, 96, 0.3);
+    margin-top: 60px;
+    border-radius: 20px;
+}
+
+.how-it-works h2 {
+    color: #e94560;
+    font-size: 28px;
+    margin-bottom: 50px;
+}
+
+.steps {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.step {
+    background: #16213e;
+    padding: 25px;
+    border-radius: 15px;
+    border: 1px solid rgba(233, 69, 96, 0.2);
+}
+
+.step-num {
+    width: 50px;
+    height: 50px;
+    background: #e94560;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 auto 15px;
+}
+
+.step h3 {
+    color: #fff;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.step p {
+    color: #aaa;
+    font-size: 14px;
+    line-height: 1.6;
+}
     </style>
 </head>
 <body>
@@ -248,5 +303,25 @@ body {
         });
     });
 </script>
+<section class="how-it-works" data-aos="fade-up">
+    <h2>چطور کار می‌کنه؟</h2>
+    <div class="steps">
+        <div class="step" data-aos="fade-up" data-aos-delay="100">
+            <div class="step-num">۱</div>
+            <h3>عکس رو آپلود کن</h3>
+            <p>یه عکس واضح از کاراکترت انتخاب کن</p>
+        </div>
+        <div class="step" data-aos="fade-up" data-aos-delay="200">
+            <div class="step-num">۲</div>
+            <h3>هوش مصنوعی پردازش می‌کنه</h3>
+            <p>عکست به رفرنس شیت چندنمایی تبدیل می‌شه</p>
+        </div>
+        <div class="step" data-aos="fade-up" data-aos-delay="300">
+            <div class="step-num">۳</div>
+            <h3>نتیجه رو بگیر</h3>
+            <p>رفرنس شیت آماده‌ست! دانلودش کن</p>
+        </div>
+    </div>
+</section>
 </body>
 </html>
