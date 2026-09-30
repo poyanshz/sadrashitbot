@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ساخت کاراکتر رفرنس شیت</title>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/estedad-font@v1.0.0/dist/font-face.css" rel="stylesheet">
     <style>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
             margin: 0;
             padding: 20px;
         }
@@ -377,14 +375,14 @@
 </head>
 <body>
     <div class="container">
-        <h1 data-aos="fade-down">کاراکتر رفرنس شیت</h1>
-        <p data-aos="fade-up" data-aos-delay="100">عکست رو آپلود کن تا رفرنس شیت بسازیم</p>
+        <h1>کاراکتر رفرنس شیت</h1>
+        <p>عکست رو آپلود کن تا رفرنس شیت بسازیم</p>
 
         <form id="uploadForm">
-            <label for="photo" class="upload-btn" data-aos="zoom-in" data-aos-delay="200">انتخاب عکس</label>
+            <label for="photo" class="upload-btn">انتخاب عکس</label>
             <input type="file" id="photo" name="photo" accept="image/*">
             <div id="fileName">عکسی انتخاب نشده</div>
-            <button type="submit" id="submitBtn" data-aos="fade-up" data-aos-delay="300">ساخت رفرنس شیت</button>
+            <button type="submit" id="submitBtn">ساخت رفرنس شیت</button>
         </form>
 
         <div id="result"></div>
@@ -460,57 +458,29 @@
             }
         });
     </script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <div class="cursor-dot"></div>
 <div class="cursor-outline"></div>
-<script>
-    // Parallax روی کانتینر
-    gsap.to(".container", {
-        yPercent: -15,
-        ease: "none",
-        scrollTrigger: {
-            trigger: "body",
-            start: "top top",
-            end: "bottom top",
-            scrub: 1
-        }
-    });
-
-    // انیمیشن دکمه‌ها با اسکرول
-    gsap.utils.toArray(".upload-btn").forEach((btn) => {
-        gsap.to(btn, {
-            y: -10,
-            ease: "none",
-            scrollTrigger: {
-                trigger: btn,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: 1
-            }
-        });
-    });
-</script>
-<section class="how-it-works" data-aos="fade-up">
+<section class="how-it-works">
     <h2>چطور کار می‌کنه؟</h2>
     <div class="steps">
-        <div class="step" data-aos="fade-up" data-aos-delay="100">
+        <div class="step">
             <div class="step-num">۱</div>
             <h3>عکس رو آپلود کن</h3>
             <p>یه عکس واضح از کاراکترت انتخاب کن</p>
         </div>
-        <div class="step" data-aos="fade-up" data-aos-delay="200">
+        <div class="step">
             <div class="step-num">۲</div>
             <h3>هوش مصنوعی پردازش می‌کنه</h3>
             <p>عکست به رفرنس شیت چندنمایی تبدیل می‌شه</p>
         </div>
-        <div class="step" data-aos="fade-up" data-aos-delay="300">
+        <div class="step">
             <div class="step-num">۳</div>
             <h3>نتیجه رو بگیر</h3>
             <p>رفرنس شیت آماده‌ست! دانلودش کن</p>
         </div>
     </div>
 </section>
-    <section class="faq" data-aos="fade-up">
+    <section class="faq">
         <h2>❓ سوالات متداول</h2>
         <div class="faq-item">
             <h3>چطور از سایت استفاده کنم؟</h3>
@@ -533,7 +503,7 @@
             <p>بعد از ساخت، روی دکمه «دانلود رفرنس شیت» بزن تا تصویر ذخیره بشه.</p>
         </div>
     </section>
-<footer class="footer" data-aos="fade-up">
+<footer class="footer">
     <div class="footer-content">
         <h3>Sadra Sheet Bot</h3>
         <p>ساخت کاراکتر رفرنس شیت با هوش مصنوعی</p>
@@ -545,8 +515,6 @@
         <p class="copyright">© 2026 Sadra Sheet Bot — تمامی حقوق محفوظ است</p>
     </div>
 </footer>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>AOS.init();</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script>
